@@ -93,3 +93,17 @@ pnpm test:ui
 pnpm build
 pnpm preview
 ```
+
+## Arsitektur
+
+```bash
+API (https://fakestoreapi.com)
+        ↓
+ useProducts() composable
+        ↓
+ index.vue / category.vue / products/[id].vue
+        ↓
+    UI Components (Tailwind)
+        ↓
+        SSR → Deployed to Vercel
+```
