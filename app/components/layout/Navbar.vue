@@ -3,33 +3,32 @@
     class="sticky top-0 z-40 shadow-[0px_6px_12px_0px_#0000000D] bg-white/80 backdrop-blur dark:bg-zinc-900/80 dark:border-zinc-800"
   >
     <div class="container flex h-14 items-center justify-between gap-4">
-      <!-- Logo -->
-      <NuxtLink
-        to="/"
-        class="font-semibold text-orange-500"
-        @click.prevent="resetAll"
-      >
-        Orange Store
-      </NuxtLink>
-
-      <!-- Nav desktop -->
-      <nav
-        class="hidden md:flex items-center gap-6 text-sm text-zinc-600 dark:text-zinc-300"
-      >
-        <button
-          v-for="c in cats"
-          :key="c"
-          class="hover:text-orange-500 hover:cursor-pointer"
-          :class="{ 'text-orange-500 font-medium': c === selectedCat }"
-          @click.prevent="selectCat(c)"
-          :title="c"
-          :aria-label="`Filter category ${c}`"
+      <div class="flex items-center gap-6">
+        <NuxtLink
+          to="/"
+          class="font-semibold text-orange-500"
+          @click.prevent="resetAll"
         >
-          {{ displayLabel(c) }}
-        </button>
-      </nav>
+          Orange Store
+        </NuxtLink>
 
-      <!-- Right tools (desktop) -->
+        <nav
+          class="hidden md:flex items-center gap-6 text-sm text-zinc-600 dark:text-zinc-300"
+        >
+          <button
+            v-for="c in cats"
+            :key="c"
+            class="hover:text-orange-500 hover:cursor-pointer"
+            :class="{ 'text-orange-500 font-medium': c === selectedCat }"
+            @click.prevent="selectCat(c)"
+            :title="c"
+            :aria-label="`Filter category ${c}`"
+          >
+            {{ capitalize(displayLabel(c)) }}
+          </button>
+        </nav>
+      </div>
+
       <div class="hidden md:flex items-center gap-2">
         <slot name="search" />
         <button class="btn" @click="toggle">
@@ -40,7 +39,7 @@
         </button>
       </div>
 
-      <!-- Hamburger (mobile) -->
+      <!-- Hamburger buat mobile -->
       <button
         class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border border-zinc-200 dark:border-zinc-700"
         @click="toggleMenu"
