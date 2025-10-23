@@ -33,5 +33,5 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: { API_BASE: "https://fakestoreapi.com" },
   },
-  nitro: { preset: "node" },
+  nitro: { preset: "vercel" },
 });
