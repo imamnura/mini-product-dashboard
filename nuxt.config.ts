@@ -11,6 +11,13 @@ export default defineNuxtConfig({
           name: "description",
           content: "Simple product dashboard using FakeStore API",
         },
+        { property: "og:title", content: "Orange Store" },
+        {
+          property: "og:description",
+          content: "Simple product dashboard using FakeStore API",
+        },
+        { property: "og:site_name", content: "Orange Store" },
+        { property: "og:type", content: "website" },
       ],
       link: [{ rel: "preconnect", href: "https://fakestoreapi.com" }],
     },
@@ -31,7 +38,7 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: true },
   runtimeConfig: {
-    public: { API_BASE: "https://fakestoreapi.com" },
+    public: { API_BASE: "https://fakestoreapi.com" }, // api base statis
   },
   nitro: { preset: "vercel" },
 });

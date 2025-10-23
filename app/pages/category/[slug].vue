@@ -1,7 +1,29 @@
 <script setup lang="ts">
 const route = useRoute();
 const { fetchByCategory } = useProducts();
+
 const slug = computed(() => String(route.params.slug));
+const title = computed(
+  () => slug.value.charAt(0).toUpperCase() + slug.value.slice(1)
+);
+const selectedCat = useState<string>("nav:selectedCat", () => "");
+const searchQuery = useState<string>("global:q", () => "");
+
+//seo
+useHead({
+  title: `${title} Products - Orange Store`,
+  meta: [
+    {
+      name: "description",
+      content: `Explore all ${title} products on Orange Store.`,
+    },
+    { property: "og:title", content: `${title} Products - Orange Store` },
+    {
+      property: "og:description",
+      content: `Discover our collection of ${title} products.`,
+    },
+  ],
+});
 
 const { data, pending, error } = await useAsyncData(
   `cat-${slug.value}`,
@@ -25,6 +47,12 @@ function loadMore() {
   if (hasMore.value) page.value++;
 }
 
+function resetProduct() {
+  selectedCat.value = "";
+  searchQuery.value = "";
+  navigateTo("/");
+}
+
 // function onScroll() {
 //   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
 //     if (page.value * pageSize < total.value) page.value++;
@@ -37,8 +65,10 @@ function loadMore() {
 <template>
   <main class="container my-6">
     <nav class="text-sm text-zinc-500 mb-4">
-      <NuxtLink to="/" class="hover:underline">Home</NuxtLink>
-      <span class="mx-2">›</span>
+      <NuxtLink to="/" class="hover:underline" @click.prevent="resetProduct"
+        >Home</NuxtLink
+      >
+      <span class="mx-2">></span>
       <span class="text-zinc-700 dark:text-zinc-200 capitalize">{{
         slug
       }}</span>
@@ -69,7 +99,7 @@ function loadMore() {
       v-else-if="error"
       class="rounded-xl border p-6 text-red-600 dark:border-zinc-700"
     >
-      ⚠️ {{ (error as any).statusMessage || "Terjadi kesalahan" }}
+      {{ (error as any).statusMessage || "Terjadi kesalahan" }}
     </div>
 
     <div v-else class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">

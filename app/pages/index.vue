@@ -1,4 +1,18 @@
 <script setup lang="ts">
+//seo
+useHead({
+  title: "Orange Store",
+  meta: [
+    { property: "og:title", content: "Orange Store" },
+    {
+      property: "og:description",
+      content: "Orange Store - All Products Dashboard",
+    },
+    { property: "og:site_name", content: "Orange Store" },
+    { property: "og:type", content: "website" },
+  ],
+});
+
 const { fetchAll, fetchCategories } = useProducts();
 
 // data
@@ -22,9 +36,18 @@ const displayStart = computed(() => (total.value > 0 ? 1 : 0));
 const displayEnd = computed(() => endIndex.value);
 const hasMore = computed(() => endIndex.value < total.value);
 
-const titleLabel = computed(() =>
-  selectedCat.value ? `${capitalize(selectedCat.value)} Product` : "All Product"
-);
+const titleLabel = computed(() => {
+  const search = q.value.trim();
+  const category = selectedCat.value;
+
+  if (search) {
+    return `Search Results for “${search}”`;
+  }
+  if (category) {
+    return `${capitalize(category)} Product`;
+  }
+  return "All Product";
+});
 
 async function load() {
   loading.value = true;
@@ -35,7 +58,7 @@ async function load() {
     ]);
     applyFilter();
   } catch (e: any) {
-    error.value = e?.statusMessage || "Terjadi kesalahan";
+    error.value = e?.statusMessage || "Terjadi kesalahan Fetch data";
   } finally {
     loading.value = false;
   }
@@ -86,7 +109,7 @@ const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
       class="container mt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
     >
       <div>
-        <h3 class="text-lg font-semibold">{{ titleLabel }}</h3>
+        <h3 class="text-lg font-semibold text-orange-500">{{ titleLabel }}</h3>
         <p class="text-xs text-zinc-500">
           Displaying
           <span class="font-medium">{{ displayStart }}</span> -

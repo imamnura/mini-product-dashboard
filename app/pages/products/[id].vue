@@ -6,6 +6,28 @@ const { data, pending, error } = await useAsyncData(
   () => fetchById(String(route.params.id)),
   { server: true }
 );
+//seo
+useHead({
+  title: data.value
+    ? `${data.value.title} – Orange Store`
+    : "Product Detail – Orange Store",
+  meta: [
+    {
+      name: "description",
+      content: data.value?.description || "Product details and specs",
+    },
+    { property: "og:title", content: data.value?.title || "Product Detail" },
+    {
+      property: "og:description",
+      content: data.value?.description || "Product information",
+    },
+    {
+      property: "og:image",
+      content: data.value?.image || "https://placehold.co/600x400",
+    },
+    { property: "og:type", content: "product" },
+  ],
+});
 </script>
 
 <template>
@@ -42,21 +64,21 @@ const { data, pending, error } = await useAsyncData(
         class="rounded-2xl border bg-white dark:bg-zinc-900 dark:border-zinc-700 p-6 grid place-items-center"
       >
         <img
-          :src="data.image"
-          :alt="data.title"
+          :src="data?.image"
+          :alt="data?.title"
           class="max-h-80 object-contain"
         />
       </div>
 
       <div class="space-y-3">
-        <h1 class="text-2xl font-semibold">{{ data.title }}</h1>
+        <h1 class="text-2xl font-semibold">{{ data?.title }}</h1>
         <div class="badge">
-          <span>⭐</span><span>{{ data.rating?.rate }}</span
-          ><span class="text-zinc-400">({{ data.rating?.count }})</span>
+          <span>⭐</span><span>{{ data?.rating?.rate }}</span
+          ><span class="text-zinc-400">({{ data?.rating?.count }})</span>
         </div>
-        <p class="text-orange-600 text-2xl font-bold">$ {{ data.price }}</p>
+        <p class="text-orange-600 text-2xl font-bold">$ {{ data?.price }}</p>
         <p class="text-sm text-zinc-600 dark:text-zinc-300">
-          {{ data.description }}
+          {{ data?.description }}
         </p>
 
         <button class="btn w-48 mt-2 opacity-60 cursor-not-allowed">
