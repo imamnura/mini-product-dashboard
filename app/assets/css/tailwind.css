@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+.container {
+  @apply mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* tombol utama */
+.btn {
+  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium border transition;
+  @apply border-zinc-200 bg-white hover:bg-zinc-50;
+  @apply dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700;
+}
+
+/* badge rating */
+.badge {
+  @apply inline-flex items-center gap-1 text-xs rounded-full px-2 py-0.5 border;
+  @apply border-zinc-200 text-zinc-700;
+  @apply dark:border-zinc-700 dark:text-zinc-300;
+}
