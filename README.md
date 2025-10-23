@@ -6,42 +6,35 @@ Aplikasi ini dibuat untuk menampilkan kemampuan frontend modern dengan integrasi
 ## Fitur Utama
 
 1. Product List Page
-
-- Menampilkan daftar produk (gambar, nama, harga, kategori)
-- Pencarian dengan debounce dan riwayat pencarian
-- Filter produk berdasarkan kategori
-- Pagination dinamis (4 item per klik “Muat lebih banyak”)
+  - Menampilkan daftar produk (gambar, nama, harga, kategori)
+  - Pencarian dengan debounce dan riwayat pencarian
+  - Filter produk berdasarkan kategori
+  - Pagination dinamis (4 item per klik “Muat lebih banyak”)
 
 2. Product Detail Page
-
-- Halaman detail berisi gambar besar, deskripsi, harga, dan rating
-- Breadcrumb produk
+  - Halaman detail berisi gambar besar, deskripsi, harga, dan rating
+  - Breadcrumb produk
 
 3. Product Category Page
-
-- Menampilkan semua produk dari kategori tertentu
-- Pagination
+  - Menampilkan semua produk dari kategori tertentu
+  - Pagination
 
 4. Responsif & Modern UI
-
-- Tampilan konsisten di desktop, tablet, dan mobile
-- Styling menggunakan Tailwind v4
+  - Tampilan konsisten di desktop, tablet, dan mobile
+  - Styling menggunakan Tailwind v4
 
 5. Dark Mode
-
-- Toggle dark/light mode dengan penyimpanan di localStorage
-- Sinkron dengan prefers-color-scheme dari browser
+  - Toggle dark/light mode dengan penyimpanan di localStorage
+  - Sinkron dengan prefers-color-scheme dari browser
 
 6. Backend Integration
-
-- Menggunakan $fetch/asyncData dengan error handling
-- Caching sederhana pake useState().
+  - Menggunakan $fetch/asyncData dengan error handling
+  - Caching sederhana pake useState().
 
 7. Optimasi & UX
-
-- Lazy loading gambar
-- Debounce pencarian
-- SSR
+  - Lazy loading gambar
+  - Debounce pencarian
+  - SSR
 
 ## Stuktur Folder
 
