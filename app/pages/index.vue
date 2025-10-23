@@ -66,17 +66,15 @@ const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
     <!-- Hero -->
     <section class="container mt-6">
       <div class="relative overflow-hidden rounded-2xl">
-        <img
-          src="https://images.unsplash.com/photo-1548669558-33b41e4b7e1b?q=80&w=1600&auto=format&fit=crop"
-          alt=""
-          class="h-64 w-full object-cover"
-        />
+        <img src="/banner.png" alt="" class="h-64 w-full object-cover" />
         <div
-          class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"
+          class="absolute inset-0 bg-linear-to-r from-black/60 to-transparent"
         ></div>
-        <div class="absolute left-6 top-6 text-white">
-          <p class="text-sm">Discover Our Fall/Winter 2025 Collection</p>
-          <h2 class="text-2xl font-semibold">
+        <div class="absolute left-6 top-[35%] text-white w-[45%]">
+          <p class="text-2xl font-bold">
+            Discover Our Fall/Winter 2025 Collection
+          </p>
+          <h2 class="text-base mt-1">
             Step into the season with fresh new arrivals
           </h2>
         </div>
