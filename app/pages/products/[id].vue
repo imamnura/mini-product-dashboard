@@ -34,7 +34,7 @@ useHead({
   <main class="container my-6">
     <nav class="text-sm text-zinc-500 mb-4">
       <NuxtLink to="/" class="hover:underline">Home</NuxtLink>
-      <span class="mx-2">›</span>
+      <span class="mx-2">></span>
       <NuxtLink
         v-if="data"
         :to="`/category/${data.category}`"
@@ -42,7 +42,7 @@ useHead({
       >
         {{ data.category }}
       </NuxtLink>
-      <span class="mx-2">›</span>
+      <span class="mx-2">></span>
       <span class="text-zinc-700 dark:text-zinc-200">{{
         data?.title ?? "..."
       }}</span>
