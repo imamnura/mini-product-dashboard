@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100"
+    class="min-h-screen flex flex-col bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100"
   >
     <LayoutNavbar>
       <template #search>
@@ -8,17 +8,19 @@
       </template>
     </LayoutNavbar>
 
-    <NuxtPage :page-key="route.fullPath" />
+    <div class="flex-1">
+      <NuxtPage :page-key="route.fullPath" />
+    </div>
 
-    <footer
-      class="mt-6 py-6 text-xs text-white bg-[#2C2C2C] dark:bg-zinc-900/80"
-    >
-      <div class="container flex items-center justify-between">
+    <footer class="mt-auto text-xs text-white bg-[#2C2C2C] dark:bg-zinc-900/80">
+      <div
+        class="container py-6 text-xs text-zinc-500 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
+      >
         <p>© 2025 Orange Store. All rights reserved.</p>
         <nav class="flex gap-6">
-          <NuxtLink to="/">Privacy Policy</NuxtLink>
-          <NuxtLink to="/">Terms of Service</NuxtLink>
-          <NuxtLink to="/">Contact Us</NuxtLink>
+          <NuxtLink to="/" class="hover:underline">Privacy Policy</NuxtLink>
+          <NuxtLink to="/" class="hover:underline">Terms of Service</NuxtLink>
+          <NuxtLink to="/" class="hover:underline">Contact Us</NuxtLink>
         </nav>
       </div>
     </footer>

@@ -97,7 +97,7 @@ useHead({
         </p>
 
         <button
-          class="btn w-full mt-2 opacity-60 bg-[#6E6E6E]cursor-not-allowed"
+          class="w-full mt-2 opacity-60 bg-[#555454] cursor-not-allowed inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium border transition hover:bg-[#838181] text-white"
         >
           Sold out!
         </button>
