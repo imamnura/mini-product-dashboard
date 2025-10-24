@@ -33,6 +33,7 @@
         <slot name="search" />
         <button class="btn" @click="toggle">
           <ClientOnly>
+            <!-- next to change icon -->
             <span v-if="!isDark">🌙</span>
             <span v-else>☀️</span>
           </ClientOnly>
@@ -89,6 +90,7 @@
           <div class="pt-2 border-t border-zinc-100 dark:border-zinc-800">
             <button class="btn w-full justify-center" @click="toggle">
               <ClientOnly>
+                <!-- must hange icon moon and sun -->
                 <span v-if="!isDark">🌙 Enable Dark Mode</span>
                 <span v-else>☀️ Disable Dark Mode</span>
               </ClientOnly>

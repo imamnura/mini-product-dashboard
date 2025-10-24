@@ -14,7 +14,7 @@
 
 /* badge rating */
 .badge {
-  @apply inline-flex items-center gap-1 text-xs rounded-full px-2 py-0.5 border;
-  @apply border-zinc-200 text-zinc-700;
+  @apply inline-flex items-center gap-1 text-xs rounded-full px-1 py-0.5;
+  @apply text-zinc-700;
   @apply dark:border-zinc-700 dark:text-zinc-300;
 }

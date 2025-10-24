@@ -75,15 +75,17 @@ function resetProduct() {
     </nav>
 
     <div class="mb-4">
-      <h2 class="text-lg font-semibold mb-2 capitalize">
+      <h2
+        class="text-2xl font-semibold mb-2 capitalize text-[#2C2C2C] dark:text-white"
+      >
         Search Results For “{{ slug }}”
       </h2>
       <p class="text-xs text-zinc-500">
         Displaying
-        <span class="font-medium">{{ displayStart }}</span> -
-        <span class="font-medium">{{ displayEnd }}</span>
+        <span class="font-bold text-orange-500">{{ displayStart }}</span> -
+        <span class="font-bold text-orange-500">{{ displayEnd }}</span>
         of
-        <span class="font-medium">{{ total }}</span>
+        <span class="font-bold text-orange-500">{{ total }}</span>
         products
       </p>
     </div>

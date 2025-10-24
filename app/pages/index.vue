@@ -85,7 +85,9 @@ const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 </script>
 
 <template>
-  <main>
+  <main
+    class="bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 min-h-screen"
+  >
     <!-- Hero -->
     <section class="container mt-6">
       <div class="relative overflow-hidden rounded-2xl">
@@ -109,13 +111,16 @@ const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
       class="container mt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
     >
       <div>
-        <h3 class="text-lg font-semibold text-orange-500">{{ titleLabel }}</h3>
-        <p class="text-xs text-zinc-500">
+        <h3 class="text-2xl font-semibold text-[#2C2C2C] dark:text-white">
+          {{ titleLabel }}
+        </h3>
+        <p class="text-base text-zinc-500 dark:text-zinc-400">
           Displaying
-          <span class="font-medium">{{ displayStart }}</span> -
-          <span class="font-medium">{{ displayEnd }}</span>
+          <span class="font-bold text-orange-500">{{ displayStart }}</span>
+          -
+          <span class="font-bold text-orange-500">{{ displayEnd }}</span>
           of
-          <span class="font-medium">{{ total }}</span>
+          <span class="font-bold text-orange-500">{{ total }}</span>
           products
         </p>
       </div>

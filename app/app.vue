@@ -11,7 +11,7 @@
     <NuxtPage :page-key="route.fullPath" />
 
     <footer
-      class="border-t mt-6 py-6 text-xs text-zinc-500 dark:border-zinc-800"
+      class="mt-6 py-6 text-xs text-white bg-[#2C2C2C] dark:bg-zinc-900/80"
     >
       <div class="container flex items-center justify-between">
         <p>© 2025 Orange Store. All rights reserved.</p>
