@@ -40,15 +40,32 @@
         </div>
       </div>
       <h3 class="line-clamp-2 text-base">{{ p.title }}</h3>
-      <p class="font-bold text-[#2C2C2C] dark:text-orange-500">
-        $ {{ p.price }}
-      </p>
+      <div class="flex items-center justify-between gap-2">
+        <p class="font-bold text-[#2C2C2C] dark:text-orange-500">
+          $ {{ p.price }}
+        </p>
+        <button
+          class="btn !px-3 !py-1.5 text-xs shrink-0"
+          :class="{ '!border-orange-400 !text-orange-500': justAdded }"
+          @click.stop.prevent="handleAdd"
+        >
+          {{ justAdded ? "Added ✓" : "Add to Cart" }}
+        </button>
+      </div>
     </div>
   </NuxtLink>
 </template>
 
 <script setup lang="ts">
 import type {} from "~/composables/useProducts";
-defineProps<{ p: any }>();
+const props = defineProps<{ p: any }>();
+const { addToCart } = useCart();
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+const justAdded = ref(false);
+function handleAdd() {
+  addToCart(props.p, 1);
+  justAdded.value = true;
+  setTimeout(() => (justAdded.value = false), 1200);
+}
 </script>

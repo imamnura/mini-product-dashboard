@@ -19,19 +19,26 @@ Aplikasi ini dibuat untuk menampilkan kemampuan frontend modern dengan integrasi
   - Menampilkan semua produk dari kategori tertentu
   - Pagination
 
-4. Responsif & Modern UI
+4. Shopping Cart
+  - Tambah produk ke keranjang dari kartu produk maupun halaman detail (dengan pilihan qty)
+  - Ubah jumlah, hapus item, dan clear cart di halaman `/cart`
+  - Badge jumlah item real-time di navbar
+  - Keranjang tersimpan di localStorage, jadi tetap ada saat halaman di-refresh
+  - Simulasi checkout (mengosongkan keranjang + pesan konfirmasi)
+
+5. Responsif & Modern UI
   - Tampilan konsisten di desktop, tablet, dan mobile
   - Styling menggunakan Tailwind v4
 
-5. Dark Mode
+6. Dark Mode
   - Toggle dark/light mode dengan penyimpanan di localStorage
   - Sinkron dengan prefers-color-scheme dari browser
 
-6. Backend Integration
+7. Backend Integration
   - Menggunakan $fetch/asyncData dengan error handling
   - Caching sederhana pake useState().
 
-7. Optimasi & UX
+8. Optimasi & UX
   - Lazy loading gambar
   - Debounce pencarian
   - SSR
@@ -40,22 +47,29 @@ Aplikasi ini dibuat untuk menampilkan kemampuan frontend modern dengan integrasi
 
 ```bash
 orange-store/
-|--assets/
-|  |--css/tailwind.css
-|--components/
-|  |--layout/Navbar.vue
-|  |--ui/
-|     |--CategoryFilter.vue
-|     |--ProductCard.vue
-|     |--SearchBar.vue
-|     |--SkeletonCard.vue
-|--composables/
-|  |--useDebounce.ts
-|  |--useProducts.ts
-|  |--useTheme.ts
-|--pages/
-|  |--category/
-|  |--products/
+|--app/
+|  |--assets/
+|  |  |--css/tailwind.css
+|  |--components/
+|  |  |--layout/Navbar.vue
+|  |  |--ui/
+|  |     |--CategoryFilter.vue
+|  |     |--ProductCard.vue
+|  |     |--SearchBar.vue
+|  |     |--SkeletonCard.vue
+|  |--composables/
+|  |  |--useCart.ts
+|  |  |--useDebounce.ts
+|  |  |--useProducts.ts
+|  |  |--useTheme.ts
+|  |--pages/
+|     |--cart.vue
+|     |--category/
+|     |--products/
+|--docs/
+|  |--ARCHITECTURE.md
+|  |--FLOW.md
+|  |--DEVELOPMENT.md
 |--tests/
 |--nuxt.config.ts
 |--package.json
@@ -63,6 +77,12 @@ orange-store/
 |--vitest.config.ts
 |--tsconfig.json
 ```
+
+Dokumentasi lebih detail:
+
+- [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) — stack, layer, state management
+- [docs/FLOW.md](./docs/FLOW.md) — alur data & interaksi pengguna (browse, kategori, cart, dark mode)
+- [docs/DEVELOPMENT.md](./docs/DEVELOPMENT.md) — setup, konvensi, testing, panduan menambah fitur
 
 ## Setup
 
@@ -92,11 +112,14 @@ pnpm preview
 ```bash
 API (https://fakestoreapi.com)
         ↓
- useProducts() composable
-        ↓
- index.vue / category.vue / products/[id].vue
+ useProducts() composable ──── useCart() (localStorage, client-only)
+        ↓                              ↓
+ index.vue / category.vue      ProductCard.vue / products/[id].vue / cart.vue
+ / products/[id].vue
         ↓
     UI Components (Tailwind)
         ↓
         SSR → Deployed to Vercel
 ```
+
+Detail lengkap ada di [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md).

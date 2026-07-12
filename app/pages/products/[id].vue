@@ -1,11 +1,27 @@
 <script setup lang="ts">
 const route = useRoute();
 const { fetchById } = useProducts();
+const { addToCart } = useCart();
 const { data, pending, error } = await useAsyncData(
   `product-${route.params.id}`,
   () => fetchById(String(route.params.id)),
   { server: true }
 );
+
+const qty = ref(1);
+const justAdded = ref(false);
+function increment() {
+  qty.value++;
+}
+function decrement() {
+  if (qty.value > 1) qty.value--;
+}
+function handleAdd() {
+  if (!data.value) return;
+  addToCart(data.value, qty.value);
+  justAdded.value = true;
+  setTimeout(() => (justAdded.value = false), 1500);
+}
 //seo
 useHead({
   title: data.value
@@ -96,11 +112,35 @@ useHead({
           {{ data?.description }}
         </p>
 
-        <button
-          class="w-full mt-2 opacity-60 bg-[#555454] cursor-not-allowed inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium border transition hover:bg-[#838181] text-white"
-        >
-          Sold out!
-        </button>
+        <div class="flex items-center gap-3 pt-2">
+          <div
+            class="inline-flex items-center rounded-xl border border-zinc-200 dark:border-zinc-700"
+          >
+            <button
+              class="h-10 w-10 grid place-items-center hover:bg-zinc-50 dark:hover:bg-zinc-800"
+              @click="decrement"
+              aria-label="Decrease quantity"
+            >
+              −
+            </button>
+            <span class="w-10 text-center text-sm">{{ qty }}</span>
+            <button
+              class="h-10 w-10 grid place-items-center hover:bg-zinc-50 dark:hover:bg-zinc-800"
+              @click="increment"
+              aria-label="Increase quantity"
+            >
+              +
+            </button>
+          </div>
+
+          <button
+            class="flex-1 inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium border transition text-white bg-orange-500 border-orange-500 hover:bg-orange-600"
+            :class="{ '!bg-green-600 !border-green-600': justAdded }"
+            @click="handleAdd"
+          >
+            {{ justAdded ? "Added to Cart ✓" : "Add to Cart" }}
+          </button>
+        </div>
       </div>
     </div>
   </main>

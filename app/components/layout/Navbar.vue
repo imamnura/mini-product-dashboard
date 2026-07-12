@@ -31,6 +31,17 @@
 
       <div class="hidden md:flex items-center gap-2">
         <slot name="search" />
+        <NuxtLink to="/cart" class="btn relative" aria-label="View cart">
+          🛒
+          <ClientOnly>
+            <span
+              v-if="totalItems > 0"
+              class="absolute -top-1.5 -right-1.5 grid place-items-center h-5 min-w-5 px-1 rounded-full bg-orange-500 text-white text-[10px] font-semibold"
+            >
+              {{ totalItems }}
+            </span>
+          </ClientOnly>
+        </NuxtLink>
         <button class="btn" @click="toggle">
           <ClientOnly>
             <!-- next to change icon -->
@@ -41,16 +52,29 @@
       </div>
 
       <!-- Hamburger buat mobile -->
-      <button
-        class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border border-zinc-200 dark:border-zinc-700"
-        @click="toggleMenu"
-        :aria-expanded="isOpen ? 'true' : 'false'"
-        aria-controls="mobile-menu"
-        aria-label="Toggle navigation"
-      >
-        <span v-if="!isOpen">☰</span>
-        <span v-else>✕</span>
-      </button>
+      <div class="md:hidden flex items-center gap-2">
+        <NuxtLink to="/cart" class="btn relative" aria-label="View cart">
+          🛒
+          <ClientOnly>
+            <span
+              v-if="totalItems > 0"
+              class="absolute -top-1.5 -right-1.5 grid place-items-center h-5 min-w-5 px-1 rounded-full bg-orange-500 text-white text-[10px] font-semibold"
+            >
+              {{ totalItems }}
+            </span>
+          </ClientOnly>
+        </NuxtLink>
+        <button
+          class="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-zinc-200 dark:border-zinc-700"
+          @click="toggleMenu"
+          :aria-expanded="isOpen ? 'true' : 'false'"
+          aria-controls="mobile-menu"
+          aria-label="Toggle navigation"
+        >
+          <span v-if="!isOpen">☰</span>
+          <span v-else>✕</span>
+        </button>
+      </div>
     </div>
 
     <!-- Mobile panel -->
@@ -105,6 +129,7 @@
 <script setup lang="ts">
 const { isDark, toggle } = useTheme();
 const { fetchCategories } = useProducts();
+const { totalItems } = useCart();
 
 const cats = ref<string[]>([]);
 const selectedCat = useState<string>("nav:selectedCat", () => "");
