@@ -57,8 +57,8 @@
 </template>
 
 <script setup lang="ts">
-import type {} from "~/composables/useProducts";
-const props = defineProps<{ p: any }>();
+import type { Product } from "~/composables/useProducts";
+const props = defineProps<{ p: Product }>();
 const { addToCart } = useCart();
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 

@@ -13,12 +13,12 @@ export function useCart() {
   const hydrated = useState("cart:hydrated", () => false);
 
   function persist() {
-    if (!process.client) return;
+    if (!import.meta.client) return;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items.value));
   }
 
   function hydrate() {
-    if (!process.client || hydrated.value) return;
+    if (!import.meta.client || hydrated.value) return;
     hydrated.value = true;
     try {
       const raw = localStorage.getItem(STORAGE_KEY);

@@ -1,6 +1,6 @@
 export function useTheme() {
   const isDark = useState("isDark", () => {
-    if (!process.client) return false;
+    if (!import.meta.client) return false;
     // Check localStorage first
     const stored = localStorage.getItem("theme");
     if (stored) return stored === "dark";
@@ -9,7 +9,7 @@ export function useTheme() {
   });
 
   const applyTheme = (dark: boolean) => {
-    if (!process.client) return;
+    if (!import.meta.client) return;
     document.documentElement.classList.toggle("dark", dark);
     localStorage.setItem("theme", dark ? "dark" : "light");
     isDark.value = dark;
@@ -20,14 +20,13 @@ export function useTheme() {
   };
 
   onMounted(() => {
-    if (!process.client) return;
     const stored = localStorage.getItem("theme");
     if (stored) {
       applyTheme(stored === "dark");
     } else {
       // Use system preference if no localStorage
       const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: light)"
+        "(prefers-color-scheme: dark)"
       ).matches;
       applyTheme(prefersDark);
     }

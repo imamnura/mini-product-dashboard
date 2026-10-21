@@ -31,6 +31,8 @@
 const route = useRoute();
 const qState = useState("global:q", () => "");
 const q = ref(qState.value);
+// sinkronkan input saat query direset dari luar (mis. klik logo / Home)
+watch(qState, (v) => (q.value = v));
 function onSearch(v: string) {
   qState.value = v;
 }

@@ -148,31 +148,30 @@ const toFirstWord = (s: string) => {
 
 const displayLabel = (s: string) => toFirstWord(s);
 
+//hamburger
+// ESC untuk menutup
+const onKey = (e: KeyboardEvent) => {
+  if (e.key === "Escape") closeMenu();
+};
+
+// Tutup saat pindah route
+// (hook & watcher didaftarkan sinkron di setup, bukan setelah await,
+// supaya tetap terikat ke instance komponen)
+const route = useRoute();
+watch(
+  () => route.fullPath,
+  () => closeMenu()
+);
+
 onMounted(async () => {
-  try {
-    cats.value = await fetchCategories();
-  } catch {
-    cats.value = [];
-  }
-
-  //hamburger
-  // ESC untuk menutup
-  const onKey = (e: KeyboardEvent) => {
-    if (e.key === "Escape") closeMenu();
-  };
   window.addEventListener("keydown", onKey);
-  onBeforeUnmount(() => window.removeEventListener("keydown", onKey));
-
-  // Tutup saat pindah route
-  const route = useRoute();
-  watch(
-    () => route.fullPath,
-    () => closeMenu()
-  );
+  // fetchCategories sudah mengembalikan [] saat gagal
+  cats.value = await fetchCategories();
 });
+onBeforeUnmount(() => window.removeEventListener("keydown", onKey));
 
 function lockScroll(lock: boolean) {
-  if (!process.client) return;
+  if (!import.meta.client) return;
   document.documentElement.classList.toggle("overflow-hidden", lock);
 }
 

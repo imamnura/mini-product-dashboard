@@ -74,6 +74,7 @@ const emit = defineEmits<{ (e: "change", v: string): void }>();
 
 const q = ref(model.value);
 const open = ref(false);
+watch(model, (v) => (q.value = v));
 
 const historyState = useState<string[]>("search:history", () => []);
 const limit = 8;
@@ -101,6 +102,7 @@ function onInput() {
 }
 function clear() {
   q.value = "";
+  model.value = "";
   emit("change", "");
 }
 

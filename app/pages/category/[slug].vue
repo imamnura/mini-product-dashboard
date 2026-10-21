@@ -11,16 +11,19 @@ const searchQuery = useState<string>("global:q", () => "");
 
 //seo
 useHead({
-  title: `${title} Products - Orange Store`,
+  title: () => `${title.value} Products - Orange Store`,
   meta: [
     {
       name: "description",
-      content: `Explore all ${title} products on Orange Store.`,
+      content: () => `Explore all ${title.value} products on Orange Store.`,
     },
-    { property: "og:title", content: `${title} Products - Orange Store` },
+    {
+      property: "og:title",
+      content: () => `${title.value} Products - Orange Store`,
+    },
     {
       property: "og:description",
-      content: `Discover our collection of ${title} products.`,
+      content: () => `Discover our collection of ${title.value} products.`,
     },
   ],
 });
